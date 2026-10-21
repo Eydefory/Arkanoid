@@ -1,5 +1,4 @@
 #include "Brick.h"
-
 #include "Constants.h"
 
 namespace Arkanoid
@@ -7,10 +6,7 @@ namespace Arkanoid
     Brick::Brick(float x, float y)
         : destroyed(false)
     {
-        brickShape.setSize(
-            sf::Vector2f(BLOCK_WIDTH, BLOCK_HEIGHT)
-        );
-
+        brickShape.setSize(sf::Vector2f(BLOCK_WIDTH, BLOCK_HEIGHT));
         brickShape.setPosition(x, y);
         brickShape.setFillColor(sf::Color(220, 80, 100));
     }
@@ -39,13 +35,12 @@ namespace Arkanoid
             return false;
 
         OnHit();
-
         return true;
     }
 
     void Brick::OnHit()
     {
-        destroyed = true;
+        Destroy();
     }
 
     void Brick::Destroy()

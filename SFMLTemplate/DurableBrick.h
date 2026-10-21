@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Brick.h"
-
 #include <vector>
 
 namespace Arkanoid
@@ -12,6 +11,7 @@ namespace Arkanoid
         DurableBrick(float x, float y);
 
         void Draw(sf::RenderWindow& window) const override;
+        void Destroy() override;
 
         int GetHitPoints() const;
         void SetHitPoints(int value);

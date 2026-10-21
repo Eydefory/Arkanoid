@@ -1,4 +1,5 @@
 #include "DurableBrick.h"
+#include <algorithm>
 
 namespace Arkanoid
 {
@@ -11,17 +12,19 @@ namespace Arkanoid
             sf::Color(220, 80, 100)
         }
     {
-        brickShape.setFillColor(damageColors[0]);
+        UpdateColor();
     }
 
     void DurableBrick::OnHit()
     {
+        if (destroyed)
+            return;
+
         --hitPoints;
 
         if (hitPoints <= 0)
         {
-            hitPoints = 0;
-            destroyed = true;
+            Destroy();
         }
         else
         {
@@ -29,17 +32,18 @@ namespace Arkanoid
         }
     }
 
+    void DurableBrick::Destroy()
+    {
+        hitPoints = 0;
+        destroyed = true;
+    }
+
     void DurableBrick::UpdateColor()
     {
         int colorIndex = 3 - hitPoints;
+        colorIndex = std::max(0, std::min(colorIndex, 2));
 
-        if (colorIndex >= 0 &&
-            colorIndex < static_cast<int>(damageColors.size()))
-        {
-            brickShape.setFillColor(
-                damageColors[colorIndex]
-            );
-        }
+        brickShape.setFillColor(damageColors[colorIndex]);
     }
 
     int DurableBrick::GetHitPoints() const
@@ -49,14 +53,8 @@ namespace Arkanoid
 
     void DurableBrick::SetHitPoints(int value)
     {
-        if (value < 0)
-            value = 0;
-
-        if (value > 3)
-            value = 3;
-
-        hitPoints = value;
-        destroyed = hitPoints <= 0;
+        hitPoints = std::max(0, std::min(value, 3));
+        destroyed = hitPoints == 0;
 
         if (!destroyed)
             UpdateColor();

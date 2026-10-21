@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
 #include "GameObject.h"
 
 namespace Arkanoid
@@ -18,7 +17,7 @@ namespace Arkanoid
         bool CheckCollision(const sf::FloatRect& ballBounds);
         bool IsDestroyed() const;
 
-        void Destroy();
+        virtual void Destroy();
 
     protected:
         virtual void OnHit();

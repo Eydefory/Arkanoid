@@ -26,7 +26,7 @@ namespace Arkanoid
 
     constexpr float BONUS_SIZE = 22.f;
     constexpr float BONUS_FALL_SPEED = 130.f;
-    constexpr float BONUS_DROP_CHANCE = 0.10f;
+    constexpr float BONUS_DROP_CHANCE = 100.f;
     constexpr float BONUS_DURATION = 7.f;
 
     constexpr float FIREBALL_SPEED_MULTIPLIER = 1.15f;
